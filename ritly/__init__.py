@@ -13,7 +13,8 @@ def create_app():
     app = Flask(__name__)
 
     # include blueprints
-    from .ritly import routes
+    from . import routes
+
     app.register_blueprint(routes.bp)
 
     return app
