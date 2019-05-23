@@ -1,13 +1,14 @@
-from flask import Blueprint
+from flask import Blueprint, request, render_template, redirect
 import string
 import random
 
-import db_con as db
+from . import db_con
 
 bp = Blueprint('routes', __name__)
+db = db_con.RitlyDB()
 
 @bp.route('/', methods=['GET'])
-def hello():
+def home():
     # TODO give users the option to shorten a link
     # given link, generate a random string and store it in a database
     # with the link for later lookup
@@ -15,25 +16,33 @@ def hello():
 
 @bp.route('/new', methods=['POST'])
 def new_link():
-    #TODO make a new link and store it in the database
-
-
+    # get link from json
+    data = request.get_json()
+    link = data['link']
 
     # get url to be shortened from the POST request
     new_url = rand_str(5)
 
-    #TODO db.add(new_url, link)
-    pass
+    # add the pair to the database
+    db.add_link(new_url, link)
+
+    return 200
 
 
-#@bp.route('/{}', methods=['GET'])
-def shortlink():
-    # TODO figure out how to take any string in the url and then look that
-    # string up in the database.
+
+@bp.route('/<url>', methods=['GET'])
+def shortlink(url):
     # If it exists, retirect to given pair in database
     # Else, render error page
+
+    link = db.lookup(url)
+
+    # if the link was invalid, redirect them to the error page
+    if link is None:
+        return 500 #TODO redirect to error page (/bad?)
     
-    pass
+    #TODO fix url to always hav proper formatting
+    return redirect(f'http://{db.lookup(url)}', code=301) #TODO change this to render template
 
 
 def rand_str(n: int):

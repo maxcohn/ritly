@@ -1,3 +1,5 @@
 *.json
-__pycache__/
+ritly/__pycache__/*
 *.pyc
+ritly/__pycache__/__init__.cpython-37.pyc
+ritly/__pycache__/routes.cpython-37.pyc
