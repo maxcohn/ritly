@@ -2,6 +2,15 @@ import os
 
 from flask import Flask
 
+# Main TODO
+# Get DB connection working
+# create DB modification and searching functions
+
+# create template page for homepage
+
+# design new url request style
+
+
 """App factory function
 
 Create the Flask application. When running the
