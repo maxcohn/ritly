@@ -21,12 +21,23 @@ $(document).ready(function(){
 			alert('Link cannot be empty');
         	return;
         }
+        // Valid URL formats:
+        // http://www.website.com
+        // www.website.com
+        // http://website.com
 
+        // regex for valid urls
         var validURL = /((([A-Za-z]{3,9}:(?:\/\/)?)(?:[-;:&=\+\$,\w]+@)?[A-Za-z0-9.-]+|(?:www.|[-;:&=\+\$,\w]+@)[A-Za-z0-9.-]+)((?:\/[\+~%\/.\w-_]*)?\??(?:[-\+=&;%@.\w_]*)#?(?:[\w]*))?)/i
         
         if(!validURL.test(data.link)){
             alert('The entered link is not valid');
             return;
+        }
+        
+        // check if the given link begins with 'http://' or now
+        if(data.link[0] === 'w'){
+            // the given link doesn't begin with the protocol, so we add it in
+            data.link = "http://" + data.link;
         }
     
         fetch('/new', {

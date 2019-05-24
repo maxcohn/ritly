@@ -45,7 +45,9 @@ def shortlink(url):
         return '500' #TODO redirect to error page (/bad?)
     
     #TODO fix url to always hav proper formatting
-    return redirect(f'http://{db.lookup(url)}', code=301) #TODO change this to render template
+    redirect_link = db.lookup(url)
+
+    return redirect(redirect_link, code=301) #TODO change this to render template
 
 
 def rand_str(n: int):
