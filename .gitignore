@@ -1,5 +1,8 @@
 *.json
-ritly/__pycache__/*
+ritly/__pycache__/
 *.pyc
+# git wasn't linking the above statements for ignoring these??
 ritly/__pycache__/__init__.cpython-37.pyc
+ritly/__pycache__/routes.cpython-37.pyc
+ritly/__pycache__/routes.cpython-37.pyc
 ritly/__pycache__/routes.cpython-37.pyc

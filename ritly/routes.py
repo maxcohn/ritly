@@ -7,12 +7,15 @@ from . import db_con
 bp = Blueprint('routes', __name__)
 db = db_con.RitlyDB()
 
+#TODO main objectives: make home page, error page
+#TODO error proof bad input
+
 @bp.route('/', methods=['GET'])
 def home():
     # TODO give users the option to shorten a link
     # given link, generate a random string and store it in a database
     # with the link for later lookup
-    pass
+    return render_template('base.html')
 
 @bp.route('/new', methods=['POST'])
 def new_link():
@@ -26,7 +29,7 @@ def new_link():
     # add the pair to the database
     db.add_link(new_url, link)
 
-    return 200
+    return '200'
 
 
 
@@ -39,7 +42,7 @@ def shortlink(url):
 
     # if the link was invalid, redirect them to the error page
     if link is None:
-        return 500 #TODO redirect to error page (/bad?)
+        return '500' #TODO redirect to error page (/bad?)
     
     #TODO fix url to always hav proper formatting
     return redirect(f'http://{db.lookup(url)}', code=301) #TODO change this to render template
