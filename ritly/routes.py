@@ -47,7 +47,7 @@ def shortlink(url):
     #TODO fix url to always hav proper formatting
     redirect_link = db.lookup(url)
 
-    return redirect(redirect_link, code=301) #TODO change this to render template
+    return redirect(redirect_link, code=301)
 
 
 def rand_str(n: int):
